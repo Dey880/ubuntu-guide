@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubuntu server guide </title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="main-guide"> 
+        <div class="grid-container">
+            <div id="side">
+                <div id="side-links">
+                    <div id="top">
+
+                        <a href="#guide1"><strong>HEADING</strong></a> <!-- fix  -->
+
+                    </div>
+                </div>                
+                <div id="bottom">
+                    <a href="https://github.com/Dey880/ubuntu-guide">Github</a>
+                </div>
+            </div>
+            
+            <div id="guide-content">
+                <h1 id="top-guide">Guide</h1>
+                <div class="guides-list">
+                    <div class="guide-item" id="guide-<%= guide._id %>"> <!--  -->
+                        <h2 class="guide-h2">
+                            <strong>Forfatter: </strong>
+                            Julian André Tærud Pedersen
+                        </h2>
+                        <h2 class="guide-h2">Hvordan lage en ubuntu server og hoste en nettside</h2>
+                        <p class="guide-p">
+                            <strong>Tags: </strong> 
+                            server,
+                            web hosting,
+                            ubuntu,
+                            linux
+                        </p>
+                        
+                        <strong>
+                            <h3 class="guide-h3" id="guide1"><%= heading %></h3> <!--  -->
+                        </strong>
+                        <p class="guide-p"><%= guide.beskrivelse[index] %></p>
+                        <img src="/24-25/web/Ubuntu guide/bilder/" alt="Guide Image" class="guide-image"> <!--  -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
