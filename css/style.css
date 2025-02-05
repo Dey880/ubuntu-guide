@@ -1,149 +1,139 @@
-:root {
-    --primary-color: #9891f5;
-    --dark-primary: #221a8b;
-    --link-color: #5fb7ff;
-    --dark-link: #1066ac;
-    --dark-color: #313131;
-    --black-color: #0f0f0f;
-}
-
-*,
 html {
-    scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-x: hidden;
+
 }
 
 body {
-    font-family: 'Times New Roman', Times, serif;
-    margin: 0;
-    background-color: var(--primary-color);
-    display: flex;
-    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background: #343a40;
+    color: #f8f9fa;
+    overflow-x: hidden;
+    overflow-x: hidden;
 }
 
-.noscroll {
-    overflow-y: hidden;
+code {
+    padding: 2px;
+    color: crimson;
+    background-color: #dadada;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#side, #side-links, #top, #bottom, ul, .flex, .guide-item {
-    display: flex;
+pre {
+    color: crimson;
 }
 
-#side-links, #top, #bottom {
-    flex-direction: column;
+.container {
+    margin-top: 20px;
 }
 
-ul {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    justify-content: space-between;
-    flex-direction: row;
+.sidebar {
+    color: white;
+    padding: 20px;
+    height: 100%;
+    position: fixed;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+}
+
+.sidebar a:hover {
+    background: #495057;
+}
+
+.skip {
+    color: #853333;
+    padding: 10px 0 10px 10px;
+}
+
+.content {
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+strong {
+    font-weight: 600;
 }
 
 li {
-    list-style: none;
+    list-style-type: none;
 }
 
-li > a, #side-links > div > a, #bottom > a, .main-content > a {
-    color: var(--link-color);
-    text-decoration: none;
-    padding: 0 10px;
-}
-
-li:first-child {
-    flex-grow: 1;
-    width: 60%;
-    padding: 0;
-}
-
-li:last-child {
-    padding: 0 20px;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    gap: 10px;
-    height: 100vh;
-}
-
-#side {
-    background-color: var(--dark-color);
-    color: var(--link-color);
-    padding-left: 20px;
-    height: 100vh;
-    flex-direction: column;
-}
-
-#guide-content {
-    background-color: var(--primary-color);
-    padding: 20px;
-    grid-column: 2;
-    overflow-y: scroll;
-}
-
-#bottom {
-    padding-bottom: 20px;
-}
-
-#top {
-    justify-content: space-between;
-}
-
-#top > a {
-    padding: 5px 0;
-}
-
-.flex {
-    justify-content: center;
-    align-items: center;
-}
-
-.guide-input, .guide-beskrivelse {
+img {
+    max-width: 75vw;
+    border: #343a40 3px solid;
     border-radius: 5px;
-    border: solid var(--black-color);
-    width: 50%;
-}
-
-.guide-input {
-    margin-bottom: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.guide-beskrivelse {
-    min-height: min-content;
-    resize: vertical;
-}
-
-h2, .guide-h2, .guide-p {
+  }
+  
+  .detailed p {
+    padding: 15px 0 0 15px;
     margin: 0;
-    color: var(--primary-color);
+  }
+
+.code-block {
+  width: fit-content;
+  position: relative;
+  background: #f8f9fa;
+  border-radius: 4px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.guide-h2 {
-    color: black;
-    text-align: center;
+.code-block:hover {
+  background: #e9ecef;
 }
 
-.guide-link > h2 {
-    margin: 5px;
-    color: var(--link-color);
+@media (max-width: 769px) {
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: min-content;
+        background: #343a40;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 10px 0;
+        z-index: 1000;
+    }
+
+    .sidebar a {
+        flex: 0 0 auto;
+        padding: 10px 15px;
+        color: white;
+        border-right: 1px solid #495057;
+    }
+
+    .sidebar a:last-child {
+        border-right: none;
+    }
+
+    .sidebar h2 {
+        display: none;
+    }
+
+    .content {
+      width: 100vw;
+        margin-bottom: 70px;
+    }
 }
 
-.guide-item {
-    align-items: center;
-    flex-direction: column;
-    margin: 15px;
-    padding: 10px;
-    border-radius: 15px;
-    border: 5px solid var(--black-color);
-    background-color: var(--dark-color);
-}
-
-.guide-item > img {
-    max-width: 500px;
-}
-
-.guide-h3, strong {
-    color: var(--link-color);
+.copy-alert {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }

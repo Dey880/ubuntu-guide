@@ -1,54 +1,444 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="no">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubuntu server guide </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Guide for Ubuntu-webserver</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <div class="main-guide"> 
-        <div class="grid-container">
-            <div id="side">
-                <div id="side-links">
-                    <div id="top">
-
-                        <a href="#guide1"><strong>HEADING</strong></a> <!-- fix  -->
-
-                    </div>
-                </div>                
-                <div id="bottom">
-                    <a href="https://github.com/Dey880/ubuntu-guide">Github</a>
+    <div class="copy-alert">Kopiert!</div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <h2>Avsnitt</h2>
+                <a href="#">Til toppen</a>
+                <a href="#vm-setup">Opprette en virtuell maskin</a>
+                <a href="#install-ubuntu">Installer Ubuntu</a>
+                <a href="#ssh-key">(Valgfritt) Legge til ssh-key</a>
+                <a href="#install-apache">Installer Apache</a>
+                <a href="#deploy-site">Deploye nettstedet ditt</a>
+                <a href="#bottom">Til bunnen</a>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 content">
+                <h1>Guide for Ubuntu-webserver</h1>
+                <p>Velkommen til denne guiden for å sette opp en Ubuntu-webserver.</p>
+                <p><small>(Trykk på bilder for å åpne i nytt vindu)</small></p>
+                <h2 id="vm-setup">1. Opprette en virtuell maskin</h2>
+                <ul>
+                    <li><input type="checkbox"> Opprett en ny virtuell maskin</li>
+                </ul>
+                <h4 class="toggle-heading">Mer info <span class="toggle-arrow">▼</span></h4>
+                <strong><a href="#install-ubuntu" class="skip">Hopp over</a></strong>
+                <div class="detailed">
+                    <p>Du starter med å trykke på "New Virtual Machine",</p>
+                    <a href="https://files.catbox.moe/na4c1y.png" target="_blank">
+                        <img src="https://files.catbox.moe/na4c1y.png"
+                            alt="Bilde av vSpehre hvor brukeren trykker på 'New Virtual Machine...'">
+                    </a>
+                    <p>Så velger du å lage en ny Virtual Machine og trykker på "Next",</p>
+                    <a href="https://files.catbox.moe/fldkg2.png" target="_blank">
+                        <img src="https://files.catbox.moe/fldkg2.png"
+                            alt="Bilde av vSpehre hvor brukeren trykker på 'Next'">
+                    </a>
+                    <p>Så gir du et navn som betyr noe og trykker på "Next",</p>
+                    <a href="https://files.catbox.moe/d3cb31.png" target="_blank">
+                        <img src="https://files.catbox.moe/d3cb31.png"
+                            alt="Bilde av vSpehre hvor brukeren har gitt navn på den virituelle maskinen og trykker på 'Next'">
+                    </a>
+                    <p>Så velger du hvor VM'en skal være og trykker på "Next",</p>
+                    <a href="https://files.catbox.moe/ygwp0b.png" target="_blank">
+                        <img src="https://files.catbox.moe/ygwp0b.png"
+                            alt="Bilde av vSpehre hvor brukeren har valgt hvor resursen skal være og så trykker på next på 'Next'">
+                    </a>
+                    <p>Så velger du hvor VM'en skal ha lagring og trykker på "Next",</p>
+                    <a href="https://files.catbox.moe/2s03qr.png" target="_blank">
+                        <img src="https://files.catbox.moe/2s03qr.png"
+                            alt="Bilde av vSpehre hvor brukeren har valgt hvor VM'en skal ha lagring og så trykker på next på 'Next'">
+                    </a>
+                    <p>Her kan du bare trykke på "Next" fordi VMware har valgt det beste valget,</p>
+                    <a href="https://files.catbox.moe/u0b6x8.png" target="_blank">
+                        <img src="https://files.catbox.moe/u0b6x8.png"
+                            alt="Bilde av vSpehre hvor brukeren trykker på next på 'Next' når vmware spør om compatability">
+                    </a>
+                    <p>Så velger du operativ-system familien du vill bruke, i dette tilfellet er det "Linux" og "Ubuntu
+                        Linux (64-bit)",</p>
+                    <a href="https://files.catbox.moe/8crpb9.png" target="_blank">
+                        <img src="https://files.catbox.moe/8crpb9.png"
+                            alt="Bilde av vSpehre hvor brukeren velger operativ-system familien og trykker på next på 'Next'">
+                    </a>
+                    <p>Her skal du konfigurere spesifikasjonene for VM-en. Det eneste du trenger å endre, er hvordan
+                        lagringen blir håndtert, hvilken iso fil den skal bruke, og skru på "Force EFI setup",</p>
+                    <a href="https://files.catbox.moe/9njmq9.png" target="_blank">
+                        <img src="https://files.catbox.moe/9njmq9.png"
+                            alt="Bilde av vSpehre hvor brukeren har konfigurert VM'en">
+                    </a>
+                    <p>Velg 'Thin provision' under lagring slik at VM-en kun bruker den lagringsplassen den faktisk
+                        trenger,</p>
+                    <a href="https://files.catbox.moe/223suk.png" target="_blank">
+                        <img src="https://files.catbox.moe/223suk.png"
+                            alt="Bilde av vSpehre hvor brukeren har valgt 'Thin provision'">
+                    </a>
+                    <p>Velg 'Content Library ISO File' i dropdownet til "New CD/DVD Drive" for å velge iso-fil,</p>
+                    <a href="https://files.catbox.moe/tusemd.png" target="_blank">
+                        <img src="https://files.catbox.moe/tusemd.png"
+                            alt="Bilde av vSpehre hvor brukeren har valgt 'content library iso file'">
+                    </a>
+                    <p>Her velger du hvilken iso-fil du vil bruke til serveren, i dette tilfellet er det
+                        "ubuntu-22.04.1-live-server-amd64",</p>
+                    <a href="https://files.catbox.moe/xl7jlh.png" target="_blank">
+                        <img src="https://files.catbox.moe/xl7jlh.png"
+                            alt="Bilde av vSpehre hvor brukeren har valgt ubuntu iso filen">
+                    </a>
+                    <p>Her huker du av på "Connect At Power On" så du kan boote av iso filen,</p>
+                    <a href="https://files.catbox.moe/xvq3mx.png" target="_blank">
+                        <img src="https://files.catbox.moe/xvq3mx.png"
+                            alt="Bilde av vSpehre hvor brukeren har huket av 'Connect At Power On'">
+                    </a>
+                    <p>Nå skal du bytte til "VM Options" fra "Vurtual Hardware" på toppen av menyen for å så åpne "Boot
+                        Options" og huk av på "Force EFI setup" for å kunne velge hvilke medie du skal boote fra,</p>
+                    <a href="https://files.catbox.moe/os87cw.png" target="_blank">
+                        <img src="https://files.catbox.moe/os87cw.png"
+                            alt="Bilde av vSpehre hvor brukeren har huket av 'Force EFI setup'">
+                    </a>
+                    <p>Så kan du trykke på "Next" og "Finnish" for å lage VM'en,</p>
+                    <p>Så kan du trykke på "Power On" for å starte den nye VM'en,</p>
+                    <a href="https://files.catbox.moe/0kku4m.png" target="_blank">
+                        <img src="https://files.catbox.moe/0kku4m.png"
+                            alt="Bilde av vSpehre hvor brukeren har huket av 'Force EFI setup'">
+                    </a>
+                    <p>Så kan du trykke på vinduet som viser konsollen til VM'en for å få kontroll,</p>
+                    <a href="https://files.catbox.moe/hfu8fr.png" target="_blank">
+                        <img src="https://files.catbox.moe/hfu8fr.png"
+                            alt="Bilde av vSpehre hvor brukeren har huket av 'Force EFI setup'">
+                    </a>
                 </div>
-            </div>
-            
-            <div id="guide-content">
-                <h1 id="top-guide">Guide</h1>
-                <div class="guides-list">
-                    <div class="guide-item" id="guide-<%= guide._id %>"> <!--  -->
-                        <h2 class="guide-h2">
-                            <strong>Forfatter: </strong>
-                            Julian André Tærud Pedersen
-                        </h2>
-                        <h2 class="guide-h2">Hvordan lage en ubuntu server og hoste en nettside</h2>
-                        <p class="guide-p">
-                            <strong>Tags: </strong> 
-                            server,
-                            web hosting,
-                            ubuntu,
-                            linux
-                        </p>
-                        
-                        <strong>
-                            <h3 class="guide-h3" id="guide1"><%= heading %></h3> <!--  -->
-                        </strong>
-                        <p class="guide-p"><%= guide.beskrivelse[index] %></p>
-                        <img src="/24-25/web/Ubuntu guide/bilder/" alt="Guide Image" class="guide-image"> <!--  -->
-                        
-                    </div>
+                <br>
+                <h2 id="install-ubuntu">2. Installere Ubuntu</h2>
+                <ul>
+                    <li><input type="checkbox"> Installer Ubuntu på den virtuelle maskinen</li>
+                </ul>
+                <h4 class="toggle-heading">Mer info <span class="toggle-arrow">▼</span></h4>
+                <strong><a href="#ssh-key" class="skip">Hopp over</a></strong>
+                <div class="detailed">
+                    <p>Nå skal vi installere ubuntu server på VM'en vi nettop lagde så da kan vi starte med å velge "Try
+                        or Install Ubuntu Server",</p>
+                    <a href="https://files.catbox.moe/f2kmob.png" target="_blank">
+                        <img src="https://files.catbox.moe/f2kmob.png"
+                            alt="Bilde av brukeren som velger 'try or install ubuntu server'">
+                    </a>
+                    <p>her velger vi språket vi skal installere med ubuntu,</p>
+                    <a href="https://files.catbox.moe/ijwn20.png" target="_blank">
+                        <img src="https://files.catbox.moe/ijwn20.png" alt="Bilde av brukeren som velger språk">
+                    </a>
+                    <p>her velger vi hvilket layout tastaturet vårt har,</p>
+                    <a href="https://files.catbox.moe/2a6zrf.png" target="_blank">
+                        <img src="https://files.catbox.moe/2a6zrf.png"
+                            alt="Bilde av brukeren som velger tastatur layout">
+                    </a>
+                    <p>her trykker vi på done for å velge standar ubuntu server installasjon,</p>
+                    <a href="https://files.catbox.moe/gq3k07.png" target="_blank">
+                        <img src="https://files.catbox.moe/gq3k07.png" alt="Bilde av brukeren som trykker på done">
+                    </a>
+                    <p>Nå skal vi konfigurere ubuntu så den har tilgang til internettet, da går du opp til det øverste
+                        alternativet og trykker enter for å åpne menyen,</p>
+                    <a href="https://files.catbox.moe/teshoa.png" target="_blank">
+                        <img src="https://files.catbox.moe/teshoa.png"
+                            alt="Bilde av brukeren som velger det øverste alternativet">
+                    </a>
+                    <p>Så velger du "Edit IPv4" for å konfigurere IPv4,</p>
+                    <a href="https://files.catbox.moe/yftmpq.png" target="_blank">
+                        <img src="https://files.catbox.moe/yftmpq.png" alt="Bilde av brukeren som trykker på edit ipv4">
+                    </a>
+                    <p>Så velger du "Manual" for å konfigurere IPv4,</p>
+                    <a href="https://files.catbox.moe/36rfe0.png" target="_blank">
+                        <img src="https://files.catbox.moe/36rfe0.png" alt="Bilde av brukeren som trykker på manual">
+                    </a>
+                    <p>Så skriver du inn all den nødvendige informasjonen basert på hvilke ip'er du skal bruke osv. så
+                        trykker du på save</p>
+                    <a href="https://files.catbox.moe/fwdxny.png" target="_blank">
+                        <img src="https://files.catbox.moe/fwdxny.png" alt="Bilde av brukeren som har konfigurert ipv4">
+                    </a>
+                    <p>Så trykker du på done for å gå videre,</p>
+                    <a href="https://files.catbox.moe/w6q2wr.png" target="_blank">
+                        <img src="https://files.catbox.moe/w6q2wr.png" alt="Bilde av brukeren som trykker på done">
+                    </a>
+                    <p>Så trykker du på done for å gå videre, en proxy adresse er ikke nødvendig i dette tilfellet,</p>
+                    <a href="https://files.catbox.moe/qb7f53.png" target="_blank">
+                        <img src="https://files.catbox.moe/qb7f53.png" alt="Bilde av brukeren som trykker på done">
+                    </a>
+                    <p>Så trykker du på done for å gå videre, du trenger ikke å endre hvor du laster ned ubuntu fra,</p>
+                    <a href="https://files.catbox.moe/3ccezi.png" target="_blank">
+                        <img src="https://files.catbox.moe/3ccezi.png" alt="Bilde av brukeren som trykker på done">
+                    </a>
+                    <p>Så trykker du på "Continue without updating", det er ikke nødvendig å bruke den nye
+                        installasjonsprogrammet,</p>
+                    <a href="https://files.catbox.moe/jgle54.png" target="_blank">
+                        <img src="https://files.catbox.moe/jgle54.png"
+                            alt="Bilde av brukeren som trykker på 'Continue without updating'">
+                    </a>
+                    <p>Du trenger ikke å endre på noe her så det er bare å trykke på "Done",</p>
+                    <a href="https://files.catbox.moe/socvit.png" target="_blank">
+                        <img src="https://files.catbox.moe/socvit.png" alt="Bilde av brukeren som trykker på 'done'">
+                    </a>
+                    <p>Så kan du trykke på "Done",</p>
+                    <a href="https://files.catbox.moe/agy000.png" target="_blank">
+                        <img src="https://files.catbox.moe/agy000.png" alt="Bilde av brukeren som trykker på 'done'">
+                    </a>
+                    <p> og "Continue" for å finalisere oppsettet,</p>
+                    <a href="https://files.catbox.moe/d41s5l.png" target="_blank">
+                        <img src="https://files.catbox.moe/d41s5l.png"
+                            alt="Bilde av brukeren som trykker på 'continue'">
+                    </a>
+                    <p> Her skal du lage admin brukeren til serveren,</p>
+                    <a href="https://files.catbox.moe/m3x4xd.png" target="_blank">
+                        <img src="https://files.catbox.moe/m3x4xd.png" alt="Bilde av brukeren som trykker på 'done'">
+                    </a>
+                    <p> Så huker du av "Install OpenSSH server" for å kunne ssh'e deg inn i serveren,</p>
+                    <a href="https://files.catbox.moe/9n052h.png" target="_blank">
+                        <img src="https://files.catbox.moe/9n052h.png" alt="Bilde av brukeren som trykker på 'done'">
+                    </a>
+                    <p> Så trykker du på "Done" for å starte installasjonen (dette kan ta en stund),</p>
+                    <a href="https://files.catbox.moe/gh4gi8.png" target="_blank">
+                        <img src="https://files.catbox.moe/gh4gi8.png" alt="Bilde av brukeren som trykker på 'done'">
+                    </a>
+                    <p>Når det står "Reboot Now" på bunnen trykker du på den for å restarte serveren og gjøre den klar
+                        til pålogging,</p>
+                    <a href="https://files.catbox.moe/eng4nt.png" target="_blank">
+                        <img src="https://files.catbox.moe/eng4nt.png" alt="Bilde av brukeren som trykker på 'done'">
+                    </a>
+                    <p>Når det står "Please remove the installation medium, then press ENTER:" i loggen trykker du bare
+                        på enter,</p>
+                    <a href="https://files.catbox.moe/b7bg45.png" target="_blank">
+                        <img src="https://files.catbox.moe/b7bg45.png" alt="Bilde av brukeren som trykker på 'done'">
+                    </a>
+                    <p>Når du ser "(server-navn) login:" og konsollen har stoppet å skrive ting kan du skrive inn
+                        brukernavnet og passordet ditt for å logge inn i serveren,</p>
+                    <a href="https://files.catbox.moe/0fkoxi.png" target="_blank">
+                        <img src="https://files.catbox.moe/0fkoxi.png" alt="Bilde av brukeren som trykker på 'done'">
+                    </a>
+
                 </div>
-            </div>
+                <h2 id="ssh-key">2.5. <strong>(Valgfritt)</strong> Legge til ssh-key for lett pålogging</h2>
+                <ul>
+                    <li><input type="checkbox"> Legg til public ssh-key til authorized_keys</li>
+                    <li><input type="checkbox"> Aktiver PubKeyAuthentication i sshd_config</li>
+                </ul>
+                <h4 class="toggle-heading">Mer info <span class="toggle-arrow">▼</span></h4>
+                <strong><a href="#install-apache" class="skip">Hopp over</a></strong>
+                <div class="detailed">
+                    <ul>
+                        <li>For å gjøre ting lettere skal vi ssh'e oss inn i VM'en via terminalen på den datamaskinen du
+                            er på nå,</li>
+                        <li>For å ssh'e seg inn i VM'en skriver man
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">ssh (brukernavn)@(server-ip)</code></pre>
+                            </div>
+                            som for meg ville være
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">ssh julian@10.12.54.73</code></pre>
+                            </div>,
+                        </li>
+                        <li>Så må du si ja til å fortsette tilkoblingen også skrive inn passordet,</li>
+                        <a href="https://files.catbox.moe/lshozp.png" target="_blank">
+                            <img src="https://files.catbox.moe/lshozp.png" alt="">
+                        </a>
+                        <br>
+                        <li>så skal du åpne ett nytt vindu i terminalen og skrive inn
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">cat .\.ssh\id_rsa.pub</code></pre>
+                            </div>
+                        </li>
+                        <li>Hvis du får en error betyr det at du ikke har en id_rsa.pub key, du kan generere en slik ved
+                            å skrive
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">ssh-keygen -t rsa -b 4096</code></pre>
+                            </div>, etter det er ferdig kan du kjøre kommandoen over for å få din ssh-key
+                        </li>
+                        <br>
+                        <li>Nå kan du kopiere ssh-key'en din og gå tilbake til det forige vinduet med serveren på</li>
+                        <li>Når du er tilbake i serveren skriver du inn kommandoen
+
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo nano ./.ssh/authorized_keys</code></pre>
+                            </div>, skriv inn passord og lim inn ssh-key'en din.
+                            <br><strong>Pass på at det ikke er mellomrom etter ssh-key'en, dette kan føre til at
+                                nøkkelen ikke blir gjenkjent når du logger deg på igjen</strong>
+                        </li>
+                        <li>for å gå ut av redigering trykker du på
+                            <code>ctrl + x</code>,
+                            <code>y</code>,
+                            <code>ENTER</code>
+                        </li>
+                        <br>
+                        <li>For å aktivere ssh-key pålogging må man endre på config filen ved å skrive inn
+
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo nano /etc/ssh/sshd_config</code></pre>
+                            </div>, hvis du da skroller ned til der det står
+                            <code>#PubkeyAuthentication yes</code>
+                            og fjerner "#" som står forran, det samme gjør du med
+                            <code>#AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2</code>
+                        </li>
+                        <li>Når du er ferdig med dette vil den se slik ut</li>
+                        <a href="https://files.catbox.moe/bmtk7h.png" target="_blank">
+                            <img src="https://files.catbox.moe/bmtk7h.png" alt="bilde av sshd_config">
+                        </a>
+                        <li>Nå kan du skrive inn
+
+
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo systemctl restart sshd</code></pre>
+                            </div> for å restarte sshd og aktivere den nye config filen.
+                        </li>
+                    </ul>
+                </div>
+                <h2 id="install-apache">3. Installere Apache</h2>
+                <ul>
+                    <li><input type="checkbox"> Kjør
+
+                        <div class="code-block">
+                            <pre><code onclick="copyCode(this)">sudo apt install apache2</code></pre>
+                        </div>
+                    </li>
+                    <li><input type="checkbox"> Start og aktiver Apache</li>
+                </ul>
+                <h4 class="toggle-heading">Mer info <span class="toggle-arrow">▼</span></h4>
+                <strong><a href="#deploy-site" class="skip">Hopp over</a></strong>
+                <div class="detailed">
+                    <ul>
+                        <li>Nå skal vi installere og hoste nettsiden vår med apache2 og da kan vi starte med å skrive
+
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo apt install apache2 -y</code></pre>
+                            </div>
+                            for å laste ned apache2
+                        </li>
+                        <li>For å starte apache2 skriver man
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo systemctl start apache2</code></pre>
+                            </div>
+                            og
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo systemctl enable apache2</code></pre>
+                            </div>
+                        </li>
+                        <br>
+                        <li>Hvis du nå åpner en internet browser og skriver inn ip-en til VM'em vil du se apache sin
+                            standard side</li>
+                        <a href="https://files.catbox.moe/wea9ml.png" target="_blank">
+                            <img src="https://files.catbox.moe/wea9ml.png" alt="apache2's standard page">
+                        </a>
+                    </ul>
+                </div>
+                <h2 id="deploy-site">4. Deploye nettstedet ditt</h2>
+                <ul>
+                    <li><input type="checkbox"> Opprett nettstedsfiler</li>
+                    <li><input type="checkbox"> Konfigurer Apache virtual hosts</li>
+                </ul>
+                <h4 class="toggle-heading">Mer info <span class="toggle-arrow">▼</span></h4>
+                <strong><a href="#bottom" class="skip">Hopp over</a></strong>
+                <div class="detailed">
+                    <ul>
+                        <li>For å hoste nettsiden kan man enten dumpe hele siden inn i samme mappe som apache2 sin
+                            standard side eller så kan manlage en ny mappe og lage en .conf fil.</li>
+                        <li>Jeg kommer til å vise hvordan man lager en egen config fil i tilfellet det er noe man
+                            trenger å gjøre i fremtiden med nginx eller lignene</li>
+                        <br>
+                        <li>For å få nettsiden sin inn i den riktige mappen må man først navigere dit med
+
+
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">cd /var/www/</code></pre>
+                            </div>, også lage den nye mappen med
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo mkdir (navn på nettsiden)</code></pre>
+                            </div>
+                        </li>
+                        <li>så må vi endre eierskap på mappen så git og apache2 har tilgang, dette gjør vi med
+
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo chown -R $USER:$USER /var/www/(navn på nettstedet)</code></pre>
+                            </div>
+                        </li>
+                        <br>
+                        <li>Nå må vi få nettsiden inn på VM'en, jeg har nettsiden på github så jeg skriver bare noen
+                            kommandoer for å få nettsiden inn</li>
+                        <br>
+                        <li>
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">cd (navn på nettsiden)</code></pre>
+                            </div>
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo git clone https://github.com/(brukernavn)/(repo).git</code></pre>
+                            </div>
+                        </li>
+                        <li>også skriver jeg
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">mv (repo)/* ./</code></pre>
+                            </div>
+                            for å flytte alt innholdet i repoet til den mappen vi lagde
+                        </li>
+                        <li>så skriver jeg
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">rm -fr (repo)/</code></pre>
+                            </div>
+                            for å fjerne mappen som er igjenn
+                        </li>
+                        <br>
+                        <li>så skal vi konfigurere apache2 til å bruke vår nettside istedet for den standard</li>
+                        <li>
+
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo nano /etc/apache2/sites-available/(navn på nettstedet)</code></pre>
+                            </div>
+                        </li>
+                        <br>
+                        <div>
+                            <pre><code>&lt;VirtualHost *:80&gt;
+    ServerName (navn på nettsiden)
+    DocumentRoot /var/www/(navn på nettsiden)
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;</code></pre>
+                        </div>
+                        <li>
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo a2ensite (navn på nettsiden).conf</code></pre>
+                            </div>
+                            for å enable den nye nettsiden
+                        </li>
+                        <li>
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo a2dissite 000-default.conf</code></pre>
+                            </div>
+                            for å skru av standard siden
+                        </li>
+                        <li>
+                            <div class="code-block">
+                                <pre><code onclick="copyCode(this)">sudo systemctl reload apache2</code></pre>
+                            </div>
+                            for å restarte apache2
+                        </li>
+                        <br>
+                        <li>Da skal alt fungere, hvis du skulle trenge det er error loggen her
+                            <code>/var/log/apache2/error.log</code>
+                        </li>
+                    </ul>
+                </div>
+                <p id="bottom" style="color: #f8f9fa;">Du har nå forhåpentligvis lært hvordan sette opp en webserver med
+                    ubuntu og apache2.</p>
+            </main>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>
